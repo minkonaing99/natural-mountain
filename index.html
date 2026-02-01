@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Mountain | Dairy Pickup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">NM</div>
+            <div class="brandText">
+                <div class="brandName">Natural Mountain</div>
+                <div class="brandTag">Dairy • Mobile Ordering</div>
+            </div>
+        </div>
+
+        <div class="topActions">
+            <button class="iconBtn" id="btnOpenStores" aria-label="Change store">
+                Stores
+            </button>
+            <button class="iconBtn" id="btnOpenCart" aria-label="Open cart">
+                Cart <span class="badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Sticky selected store bar -->
+        <section class="storeBar" id="storeBar">
+            <div>
+                <div class="muted">Ordering from</div>
+                <div class="storeLine">
+                    <span class="storeName" id="selectedStoreName">Choose a store</span>
+                    <span class="dot">•</span>
+                    <a class="storePhone" id="selectedStorePhone" href="#" aria-label="Call store"></a>
+                </div>
+            </div>
+            <button class="btn btnGhost" id="btnChangeStore">Change</button>
+        </section>
+
+        <!-- Promo carousel -->
+        <section class="card hero">
+            <div class="carousel" aria-label="Promotions">
+                <div class="carouselTrack" id="promoTrack">
+                    <div class="slide">
+                        <div class="slideText">
+                            <div class="pill">Promotion</div>
+                            <h1>Yogurt Week</h1>
+                            <p>Buy 2 yogurts, save 10% (request-based ordering).</p>
+                            <button class="btn" data-scroll-to="shop">Shop Yogurts</button>
+                        </div>
+                        <div class="slideArt" aria-hidden="true">
+                            <div class="artCircle"></div>
+                            <div class="artLabel">Yogurt</div>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <div class="slideText">
+                            <div class="pill">Bundle</div>
+                            <h1>Non-fat Milk Pack</h1>
+                            <p>Best value bundle for weekly routine.</p>
+                            <button class="btn" data-scroll-to="shop">Shop Milk</button>
+                        </div>
+                        <div class="slideArt" aria-hidden="true">
+                            <div class="artSquare"></div>
+                            <div class="artLabel">Milk</div>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <div class="slideText">
+                            <div class="pill">New</div>
+                            <h1>Fresh Arrivals</h1>
+                            <p>New flavors available at selected stores.</p>
+                            <button class="btn" data-scroll-to="shop">Explore New</button>
+                        </div>
+                        <div class="slideArt" aria-hidden="true">
+                            <div class="artTriangle"></div>
+                            <div class="artLabel">New</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carouselDots" id="promoDots" aria-hidden="true"></div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="grid2">
+            <div class="card">
+                <h2>How ordering works</h2>
+                <ol class="steps">
+                    <li>Select your nearest store</li>
+                    <li>Choose products and quantities</li>
+                    <li>Send order request — store contacts you</li>
+                </ol>
+            </div>
+            <div class="card">
+                <h2>Quick categories</h2>
+                <div class="chips" id="categoryChips"></div>
+            </div>
+        </section>
+
+        <!-- Shop -->
+        <section class="section" id="shop">
+            <div class="sectionHead">
+                <h2>Products</h2>
+                <div class="row">
+                    <input class="input" id="searchInput" placeholder="Search products…" />
+                    <select class="select" id="categorySelect" aria-label="Category filter"></select>
+                </div>
+            </div>
+
+            <div class="products" id="productGrid"></div>
+        </section>
+    </main>
+
+    <!-- Bottom cart bar -->
+    <div class="bottomBar" id="bottomBar">
+        <div>
+            <div class="bottomTitle" id="bottomTitle">0 items</div>
+            <div class="muted" id="bottomSubtitle">Cart saved on this device</div>
+        </div>
+        <button class="btn" id="btnBottomCart">View Order</button>
+    </div>
+
+    <!-- Store modal -->
+    <dialog class="modal" id="storeModal">
+        <div class="modalHead">
+            <div>
+                <h3>Choose a store</h3>
+                <div class="muted" id="locationStatus">We can use your location to sort by nearest.</div>
+            </div>
+            <button class="iconBtn" id="btnCloseStores">Close</button>
+        </div>
+
+        <div class="modalBody">
+            <div class="row">
+                <button class="btn btnGhost" id="btnUseLocation">Use my location</button>
+                <button class="btn btnGhost" id="btnManual">Manual list</button>
+            </div>
+            <div class="storeList" id="storeList"></div>
+        </div>
+    </dialog>
+
+    <!-- Cart modal -->
+    <dialog class="modal" id="cartModal">
+        <div class="modalHead">
+            <div>
+                <h3>Your order</h3>
+                <div class="muted" id="cartStoreLine">Store not selected</div>
+            </div>
+            <button class="iconBtn" id="btnCloseCart">Close</button>
+        </div>
+
+        <div class="modalBody">
+            <div class="cartItems" id="cartItems"></div>
+
+            <div class="divider"></div>
+
+            <h4>Customer details</h4>
+            <div class="form">
+                <label class="field">
+                    <span>Name *</span>
+                    <input class="input" id="custName" placeholder="Your name" />
+                </label>
+
+                <label class="field">
+                    <span>Phone *</span>
+                    <input class="input" id="custPhone" inputmode="tel" placeholder="Your phone number" />
+                </label>
+
+                <label class="field">
+                    <span>Pickup / Delivery</span>
+                    <select class="select" id="fulfillment">
+                        <option value="pickup">Pickup</option>
+                        <option value="delivery">Delivery (if available)</option>
+                    </select>
+                </label>
+
+                <label class="field">
+                    <span>Preferred time (optional)</span>
+                    <input class="input" id="preferredTime" placeholder="e.g., 5–6 PM" />
+                </label>
+
+                <label class="field">
+                    <span>Notes (optional)</span>
+                    <textarea class="textarea" id="notes" rows="3" placeholder="Any notes for the store…"></textarea>
+                </label>
+            </div>
+
+            <div class="row between">
+                <button class="btn btnDanger" id="btnClearCart">Clear cart</button>
+                <button class="btn" id="btnSendOrder">Send Order to Store</button>
+            </div>
+
+            <p class="fineprint">
+                No online payment. The store will contact you to confirm availability, total, and payment method.
+            </p>
+        </div>
+    </dialog>
+
+    <!-- Confirm modal -->
+    <dialog class="modal" id="confirmModal">
+        <div class="modalHead">
+            <div>
+                <h3>Order sent</h3>
+                <div class="muted" id="confirmLine"></div>
+            </div>
+            <button class="iconBtn" id="btnCloseConfirm">Close</button>
+        </div>
+        <div class="modalBody">
+            <div class="card">
+                <div class="muted">Order number</div>
+                <div class="big" id="orderNumber"></div>
+            </div>
+            <div class="row">
+                <a class="btn btnGhost" id="btnCallStore" href="#">Call store</a>
+                <button class="btn" id="btnContinueShopping">Continue shopping</button>
+            </div>
+        </div>
+    </dialog>
+    <!-- Product detail modal -->
+    <dialog class="modal" id="productModal">
+        <div class="modalHead">
+            <div>
+                <h3 id="pdName">Product</h3>
+                <div class="muted" id="pdMeta"></div>
+            </div>
+            <button class="iconBtn" id="btnCloseProduct">Close</button>
+        </div>
+
+        <div class="modalBody">
+            <div class="detailGrid">
+                <img class="detailImg" id="pdImg" alt="Product image" />
+                <div>
+                    <div class="kv">
+                        <b>Category</b>
+                        <div id="pdCategory"></div>
+                        <b>Size</b>
+                        <div id="pdSize"></div>
+                        <b>Price</b>
+                        <div id="pdPrice"></div>
+                    </div>
+
+                    <div style="height:12px;"></div>
+
+                    <div class="card" style="box-shadow:none;">
+                        <h4 style="margin:0 0 10px;">About this product</h4>
+                        <p class="muted" style="font-size:14px; line-height:1.6; margin:0;" id="pdDesc"></p>
+                    </div>
+
+                    <div style="height:12px;"></div>
+
+                    <div class="row between">
+                        <div class="qtyCtrl" role="group" aria-label="Quantity selector">
+                            <button class="qtyBtn" id="pdDec" aria-label="Decrease">–</button>
+                            <div class="qtyVal" id="pdQty">0</div>
+                            <button class="qtyBtn" id="pdInc" aria-label="Increase">+</button>
+                        </div>
+                        <button class="btn" id="pdGoCart">View Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Natural Mountain — Admin</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">NM</div>
+            <div class="brandText">
+                <div class="brandName">Admin</div>
+                <div class="brandTag">Store Order Inbox (Demo)</div>
+            </div>
+        </div>
+        <div class="topActions">
+            <a class="iconBtn" href="index.html">Customer Site</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Store</h2>
+            <div class="row">
+                <select class="select" id="storeSelect"></select>
+                <button class="btn btnGhost" id="btnRefresh">Refresh</button>
+            </div>
+            <p class="fineprint">
+                Demo only: orders are read from this browser’s localStorage.
+                In production, this would load from your server.
+            </p>
+        </section>
+
+        <section class="section">
+            <div class="sectionHead">
+                <h2>Orders</h2>
+                <div class="muted" id="countLine"></div>
+            </div>
+
+            <div class="storeList" id="ordersList"></div>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
