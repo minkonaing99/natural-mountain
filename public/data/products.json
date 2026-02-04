@@ -1,0 +1,102 @@
+[
+  {
+    "id": "p1",
+    "name": "Plain Yogurt",
+    "category": "Yogurt",
+    "size": "150g",
+    "price": 35,
+    "image": "images/yogurt-plain.jpg",
+    "short": "Smooth and fresh. Great daily probiotic.",
+    "description": "Plain yogurt made from fresh milk. Mild taste, creamy texture. Suitable for breakfast bowls and smoothies."
+  },
+  {
+    "id": "p2",
+    "name": "Greek Yogurt",
+    "category": "Yogurt",
+    "size": "150g",
+    "price": 45,
+    "image": "images/yogurt-greek.jpg",
+    "short": "Thick, high-protein style.",
+    "description": "Strained yogurt for a thicker texture and higher protein. Perfect with fruit, granola, or honey."
+  },
+  {
+    "id": "p3",
+    "name": "Strawberry Yogurt",
+    "category": "Yogurt",
+    "size": "150g",
+    "price": 40,
+    "image": "images/yogurt-strawberry.jpg",
+    "short": "Light sweetness with real fruit flavor.",
+    "description": "Creamy strawberry yogurt with a bright fruit note. Enjoy chilled for a refreshing snack."
+  },
+  {
+    "id": "p4",
+    "name": "Blueberry Yogurt",
+    "category": "Yogurt",
+    "size": "150g",
+    "price": 40,
+    "image": "images/yogurt-blueberry.jpg",
+    "short": "Balanced taste, rich berry aroma.",
+    "description": "Blueberry yogurt with a smooth texture and gentle berry flavor. Great with granola or oats."
+  },
+  {
+    "id": "p5",
+    "name": "Non-fat Milk",
+    "category": "Milk",
+    "size": "1L",
+    "price": 55,
+    "image": "images/milk-nonfat-1l.jpg",
+    "short": "Light and clean taste. Zero fat.",
+    "description": "Non-fat milk with a clean finish. Great for coffee, cereal, and everyday drinking."
+  },
+  {
+    "id": "p6",
+    "name": "Non-fat Milk",
+    "category": "Milk",
+    "size": "500ml",
+    "price": 35,
+    "image": "images/milk-nonfat-500.jpg",
+    "short": "Easy size for on-the-go.",
+    "description": "Non-fat milk in a convenient 500ml size. Perfect for a quick healthy drink."
+  },
+  {
+    "id": "p7",
+    "name": "Yogurt Bundle (4 pcs)",
+    "category": "Bundles",
+    "size": "4 × 150g",
+    "price": 150,
+    "image": "images/bundle-yogurt-4.jpg",
+    "short": "Mix & match (availability depends on store).",
+    "description": "A convenient 4-pack yogurt bundle. The store will confirm available flavors when processing your request."
+  },
+  {
+    "id": "p8",
+    "name": "Weekly Milk Pack (3L)",
+    "category": "Bundles",
+    "size": "3 × 1L",
+    "price": 150,
+    "image": "images/bundle-milk-3l.jpg",
+    "short": "Best value for weekly routine.",
+    "description": "A weekly non-fat milk pack (3 × 1L). Ideal for families and meal prep."
+  },
+  {
+    "id": "p9",
+    "name": "Low Sugar Yogurt",
+    "category": "New",
+    "size": "150g",
+    "price": 42,
+    "image": "images/yogurt-low-sugar.jpg",
+    "short": "Lower sugar, clean taste.",
+    "description": "Low sugar yogurt designed for a lighter sweetness. Store will confirm availability."
+  },
+  {
+    "id": "p10",
+    "name": "High Protein Yogurt",
+    "category": "New",
+    "size": "150g",
+    "price": 49,
+    "image": "images/yogurt-high-protein.jpg",
+    "short": "Extra protein, thick texture.",
+    "description": "High protein yogurt for active lifestyles. Great post-workout snack."
+  }
+]

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../src/styles/main.css">
 </head>
 
 <body>
@@ -17,7 +17,10 @@
             <div class="logo" aria-hidden="true">NM</div>
             <div class="brandText">
                 <div class="brandName">Natural Mountain</div>
-                <div class="brandTag">Dairy • Mobile Ordering</div>
+                <div class="headerStoreStatus" id="headerStoreStatus">
+                    <span class="storeIndicatorDot" aria-hidden="true"></span>
+                    <span id="headerStoreName">Store not selected</span>
+                </div>
             </div>
         </div>
 
@@ -51,43 +54,60 @@
                 <div class="carouselTrack" id="promoTrack">
                     <div class="slide">
                         <div class="slideText">
-                            <div class="pill">Promotion</div>
-                            <h1>Yogurt Week</h1>
-                            <p>Buy 2 yogurts, save 10% (request-based ordering).</p>
-                            <button class="btn" data-scroll-to="shop">Shop Yogurts</button>
-                        </div>
-                        <div class="slideArt" aria-hidden="true">
-                            <div class="artCircle"></div>
-                            <div class="artLabel">Yogurt</div>
+                            <div class="pill">Seasonal</div>
+                            <h1>Holiday Berry Yogurt</h1>
+                            <p>Festive flavor, creamy texture, and fresh fruit in every sip.</p>
+                            <button class="btn" data-scroll-to="shop" data-cat="Yogurt" data-query="berry">Shop Yogurt</button>
                         </div>
                     </div>
 
                     <div class="slide">
                         <div class="slideText">
-                            <div class="pill">Bundle</div>
-                            <h1>Non-fat Milk Pack</h1>
-                            <p>Best value bundle for weekly routine.</p>
-                            <button class="btn" data-scroll-to="shop">Shop Milk</button>
-                        </div>
-                        <div class="slideArt" aria-hidden="true">
-                            <div class="artSquare"></div>
-                            <div class="artLabel">Milk</div>
+                            <div class="pill">Featured</div>
+                            <h1>Natural Mountain Lineup</h1>
+                            <p>Milk, drinking yogurt, and cup yogurt made with New Zealand technology.</p>
+                            <button class="btn" data-scroll-to="shop" data-cat="All">Explore Products</button>
                         </div>
                     </div>
 
                     <div class="slide">
                         <div class="slideText">
-                            <div class="pill">New</div>
-                            <h1>Fresh Arrivals</h1>
-                            <p>New flavors available at selected stores.</p>
-                            <button class="btn" data-scroll-to="shop">Explore New</button>
+                            <div class="pill">Drinking Yogurt</div>
+                            <h1>Flavor Trio</h1>
+                            <p>Strawberry, Lite Sugar, and Blueberry - light, refreshing, and ready to go.</p>
+                            <button class="btn" data-scroll-to="shop" data-cat="New">Shop Drinks</button>
                         </div>
-                        <div class="slideArt" aria-hidden="true">
-                            <div class="artTriangle"></div>
-                            <div class="artLabel">New</div>
+                    </div>
+
+                    <div class="slide">
+                        <div class="slideText">
+                            <div class="pill">Low Fat</div>
+                            <h1>Daily Healthy Pair</h1>
+                            <p>Low Fat Milk and Low Fat Yogurt (870g) for simple daily nutrition.</p>
+                            <button class="btn" data-scroll-to="shop" data-cat="Milk" data-query="non-fat">Shop Milk</button>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <div class="slideText">
+                            <div class="pill">Greek Yogurt</div>
+                            <h1>Fruit Series</h1>
+                            <p>Blueberry, Strawberry, and Mango in rich, smooth Greek yogurt.</p>
+                            <button class="btn" data-scroll-to="shop" data-cat="Yogurt" data-query="greek">Shop Greek</button>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <div class="slideText">
+                            <div class="pill">Classic</div>
+                            <h1>Pure Greek Yogurt</h1>
+                            <p>Thick, creamy, and clean taste in both 210g and 600g sizes.</p>
+                            <button class="btn" data-scroll-to="shop" data-cat="Yogurt" data-query="greek">Shop Greek</button>
                         </div>
                     </div>
                 </div>
+                <button class="carouselArrow prev" id="promoPrev" aria-label="Previous promotion">‹</button>
+                <button class="carouselArrow next" id="promoNext" aria-label="Next promotion">›</button>
 
                 <div class="carouselDots" id="promoDots" aria-hidden="true"></div>
             </div>
@@ -105,7 +125,13 @@
             </div>
             <div class="card">
                 <h2>Quick categories</h2>
-                <div class="chips" id="categoryChips"></div>
+                <p class="muted">Jump straight into what you usually buy.</p>
+                <div class="chips">
+                    <button class="chip" data-scroll-to="shop" data-cat="Milk">Daily Milk</button>
+                    <button class="chip" data-scroll-to="shop" data-cat="Yogurt">Yogurt Picks</button>
+                    <button class="chip" data-scroll-to="shop" data-cat="Bundles">Family Bundles</button>
+                    <button class="chip" data-scroll-to="shop" data-cat="New">What’s New</button>
+                </div>
             </div>
         </section>
 
@@ -113,9 +139,23 @@
         <section class="section" id="shop">
             <div class="sectionHead">
                 <h2>Products</h2>
-                <div class="row">
-                    <input class="input" id="searchInput" placeholder="Search products…" />
-                    <select class="select" id="categorySelect" aria-label="Category filter"></select>
+                <div class="shopFilters" id="shopFilters">
+                    <div class="row">
+                        <input class="input" id="searchInput" placeholder="Search products…" />
+                        <select class="select" id="categorySelect" aria-label="Category filter"></select>
+                    </div>
+                    <div class="row">
+                        <select class="select" id="sortSelect" aria-label="Sort products">
+                            <option value="popular">Sort: Popular</option>
+                            <option value="price">Sort: Price</option>
+                            <option value="new">Sort: New</option>
+                        </select>
+                    </div>
+                    <div class="chips" id="categoryChips"></div>
+                    <div class="filterMeta">
+                        <div class="activeFilters" id="activeFilters"></div>
+                        <button class="btn btnGhost btnSm" id="btnClearFilters" type="button">Clear all</button>
+                    </div>
                 </div>
             </div>
 
@@ -129,7 +169,7 @@
             <div class="bottomTitle" id="bottomTitle">0 items</div>
             <div class="muted" id="bottomSubtitle">Cart saved on this device</div>
         </div>
-        <button class="btn" id="btnBottomCart">View Order</button>
+        <button class="btn" id="btnBottomCart">Checkout</button>
     </div>
 
     <!-- Store modal -->
@@ -143,39 +183,89 @@
         </div>
 
         <div class="modalBody">
-            <div class="row">
-                <button class="btn btnGhost" id="btnUseLocation">Use my location</button>
-                <button class="btn btnGhost" id="btnManual">Manual list</button>
+            <div class="row locationControls">
+                <button class="btn btnGhost locButton" id="btnUseLocation">Use my location</button>
+                <button class="btn btnGhost iconOnly" id="btnRetryLocation" aria-label="Retry location" title="Retry location">↻</button>
+                <button class="btn btnGhost iconOnly" id="btnManual" aria-label="Manual list" title="Manual list">☰</button>
             </div>
+            <div class="chips storeTags" id="townshipTags"></div>
             <div class="storeList" id="storeList"></div>
         </div>
     </dialog>
 
     <!-- Cart modal -->
     <dialog class="modal" id="cartModal">
-        <div class="modalHead">
-            <div>
-                <h3>Your order</h3>
-                <div class="muted" id="cartStoreLine">Store not selected</div>
-            </div>
-            <button class="iconBtn" id="btnCloseCart">Close</button>
+            <div class="modalHead">
+                <div>
+                    <h3>Checkout</h3>
+                    <div class="muted" id="cartStoreLine">Store not selected</div>
+                </div>
+                <button class="iconBtn" id="btnCloseCart">Close</button>
         </div>
 
         <div class="modalBody">
             <div class="cartItems" id="cartItems"></div>
+            <div class="cartSummary" id="cartSummary">
+                <div class="summaryRow">
+                    <span>Selected products</span>
+                    <strong id="cartSelectedCount">0</strong>
+                </div>
+                <div class="summaryRow">
+                    <span>Subtotal</span>
+                    <strong id="cartSubtotalAmount">฿0</strong>
+                </div>
+                <div class="summaryRow">
+                    <span>Delivery</span>
+                    <strong id="cartDeliveryAmount">฿0</strong>
+                </div>
+                <div class="summaryRow">
+                    <span>Discount</span>
+                    <strong id="cartDiscountAmount">฿0</strong>
+                </div>
+                <div class="summaryRow total">
+                    <span>Estimated total</span>
+                    <strong id="cartTotalAmount">฿0</strong>
+                </div>
+            </div>
 
             <div class="divider"></div>
+            <div class="trustBlock" id="trustBlock">
+                <h4 class="sectionTitle">Before you send</h4>
+                <div class="trustRow">
+                    <span>Store phone</span>
+                    <strong id="trustStorePhone">-</strong>
+                </div>
+                <div class="trustRow">
+                    <span>Expected response</span>
+                    <strong>Within 15-30 minutes</strong>
+                </div>
+                <div class="trustRow">
+                    <span>Payment</span>
+                    <strong>No prepayment required</strong>
+                </div>
+            </div>
 
-            <h4>Customer details</h4>
+            <h4 class="sectionTitle">Customer details</h4>
             <div class="form">
                 <label class="field">
                     <span>Name *</span>
                     <input class="input" id="custName" placeholder="Your name" />
+                    <small class="fieldError" id="custNameError"></small>
                 </label>
 
                 <label class="field">
                     <span>Phone *</span>
                     <input class="input" id="custPhone" inputmode="tel" placeholder="Your phone number" />
+                    <small class="fieldError" id="custPhoneError"></small>
+                </label>
+
+                <label class="field">
+                    <span>Coupon code</span>
+                    <div class="couponRow">
+                        <input class="input" id="couponCode" inputmode="numeric" maxlength="8" placeholder="8-digit coupon" />
+                        <button class="btn btnGhost btnSm" id="btnApplyCoupon" type="button">Use</button>
+                    </div>
+                    <small class="fieldError" id="couponError"></small>
                 </label>
 
                 <label class="field">
@@ -199,7 +289,10 @@
 
             <div class="row between">
                 <button class="btn btnDanger" id="btnClearCart">Clear cart</button>
-                <button class="btn" id="btnSendOrder">Send Order to Store</button>
+                <button class="btn" id="btnSendOrder" disabled>
+                    <span class="btnLabel">Send Request</span>
+                    <span class="btnSpinner" aria-hidden="true"></span>
+                </button>
             </div>
 
             <p class="fineprint">
@@ -219,6 +312,7 @@
         </div>
         <div class="modalBody">
             <div class="card">
+                <div class="successMark" id="orderSuccessMark" aria-hidden="true">✓</div>
                 <div class="muted">Order number</div>
                 <div class="big" id="orderNumber"></div>
             </div>
@@ -266,14 +360,14 @@
                             <div class="qtyVal" id="pdQty">0</div>
                             <button class="qtyBtn" id="pdInc" aria-label="Increase">+</button>
                         </div>
-                        <button class="btn" id="pdGoCart">View Order</button>
+                        <button class="btn" id="pdGoCart">Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
     </dialog>
 
-    <script src="app.js"></script>
+    <script src="../src/scripts/pages/index.js"></script>
 </body>
 
 </html>
