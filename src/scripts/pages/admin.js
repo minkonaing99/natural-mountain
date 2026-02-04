@@ -1,8 +1,4 @@
-const LS = {
-  orders: "nm_orders_v1",
-};
-
-const STORES = [
+let STORES = [
   { id: "s1", name: "Natural Mountain — Downtown" },
   { id: "s2", name: "Natural Mountain — Riverside" },
   { id: "s3", name: "Natural Mountain — North Plaza" },
@@ -22,7 +18,8 @@ const els = {
 
 init();
 
-function init() {
+async function init() {
+  await loadStoresData();
   els.storeSelect.innerHTML = STORES.map(
     (s) => `<option value="${s.id}">${s.name}</option>`,
   ).join("");
@@ -31,9 +28,22 @@ function init() {
   render();
 }
 
-function render() {
+async function loadStoresData() {
+  try {
+    const r = await fetch("./data/stores.json", { cache: "no-store" });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    if (Array.isArray(data) && data.length) {
+      STORES = data.map((s) => ({ id: s.id, name: s.name }));
+    }
+  } catch {
+    console.warn("[Natural Mountain] Could not load ./data/stores.json, using in-code fallback.");
+  }
+}
+
+async function render() {
   const storeId = els.storeSelect.value;
-  const all = loadOrders();
+  const all = await loadOrders();
   const list = all[storeId] || [];
   els.countLine.textContent = `${list.length} order(s)`;
 
@@ -69,11 +79,13 @@ function render() {
   }
 }
 
-function loadOrders() {
+async function loadOrders() {
   try {
-    const raw = localStorage.getItem(LS.orders);
-    return raw ? JSON.parse(raw) : {};
+    const res = await fetch("/api/orders", { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
   } catch {
+    els.countLine.textContent = "Unable to load orders";
     return {};
   }
 }
